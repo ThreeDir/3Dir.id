@@ -144,13 +144,19 @@
     .keterangan {
       margin-top: 25px;
       font-size: 13px;
-      text-align: left;
+      text-align: justify;
       color: #555;
       background-color: #f8f8f8;
       border-radius: 8px;
       padding: 10px 14px;
       line-height: 1.6;
       box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .keterangan strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #333;
     }
   </style>
 </head>
@@ -192,12 +198,12 @@
         return;
       }
 
-      const hargaPerGram = 1300;
-      const biayaPerJam = 5000;
+      const hargaPerGram = 800;
+      const biayaPerMenit = 34; // setara dengan Rp2.000 per jam
 
-      const durasiJam = jam + (menit / 60);
+      const durasiMenit = (jam * 60) + menit;
       const biayaMaterial = gram * hargaPerGram;
-      const biayaWaktu = durasiJam * biayaPerJam;
+      const biayaWaktu = durasiMenit * biayaPerMenit;
       const total = biayaMaterial + biayaWaktu;
 
       const totalRp = total.toLocaleString('id-ID');
