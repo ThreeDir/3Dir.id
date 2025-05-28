@@ -2,10 +2,14 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Kalkulator Biaya 3D Printing - ThreeDir</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator 3D Printing | 3Dir.id</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Rubik', sans-serif;
       margin: 0;
@@ -14,38 +18,44 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .container {
       background: #ffffff;
-      padding: 30px 25px;
+      padding: 30px 20px;
       border-radius: 16px;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-      width: 100%;
+      width: 90%;
       max-width: 460px;
     }
 
     .logo {
       text-align: center;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     .logo img {
       width: 100px;
       height: 100px;
-      border-radius: 50%; /* bikin jadi lingkaran */
-      border: 4px solid #ff6f00; /* outline oranye */
-      box-shadow: 0 0 15px rgba(255, 111, 0, 0.4); /* efek glowing oranye */
+      border-radius: 50%;
+      border: 4px solid #ff6f00;
+      box-shadow: 0 0 15px rgba(255, 111, 0, 0.4);
       object-fit: cover;
     }
-
 
     h1 {
       text-align: center;
       margin-bottom: 25px;
       color: #222;
       font-weight: 600;
+      font-size: 20px;
     }
 
     label {
@@ -55,7 +65,7 @@
       color: #333;
     }
 
-    input {
+    input[type="number"] {
       width: 100%;
       padding: 12px;
       margin-top: 5px;
@@ -63,6 +73,13 @@
       border-radius: 8px;
       font-size: 15px;
       background-color: #f9f9f9;
+      -moz-appearance: textfield;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
 
     .inline-input {
@@ -83,6 +100,7 @@
       border: none;
       border-radius: 8px;
       font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
     }
@@ -126,16 +144,20 @@
     .keterangan {
       margin-top: 25px;
       font-size: 13px;
-      text-align: center;
-      color: #666;
-      line-height: 1.5;
+      text-align: left;
+      color: #555;
+      background-color: #f8f8f8;
+      border-radius: 8px;
+      padding: 10px 14px;
+      line-height: 1.6;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     }
   </style>
 </head>
 <body>
-  <div class="container animate__animated animate__fadeInUp">
+  <div class="container">
     <div class="logo">
-      <img src="logo-3dir.png" alt="Logo ThreeDir">
+      <img src="logo-3dir.png" alt="Logo 3Dir">
     </div>
     <h1>Kalkulator Biaya 3D Printing</h1>
 
@@ -154,8 +176,7 @@
     <div id="waLink"></div>
 
     <div class="keterangan">
-      <strong>Catatan:</strong> Estimasi biaya dihitung otomatis menggunakan kalkulator ThreeDir.<br>
-      Biaya akhir dapat berubah tergantung material dan kompleksitas desain.
+      <strong>Catatan:</strong> Estimasi bersifat indikatif dan dapat berubah tergantung jenis material serta kompleksitas desain. Silakan hubungi kami untuk konfirmasi lebih lanjut.
     </div>
   </div>
 
@@ -186,7 +207,7 @@
       document.getElementById('result').innerText =
         `Biaya Material: Rp ${biayaBahanRp}\nBiaya Waktu: Rp ${biayaWaktuRp}\nTotal: Rp ${totalRp}`;
 
-      const pesan = `Halo, saya telah menggunakan Kalkulator Biaya 3D Printing di ThreeDir dan mendapatkan estimasi berikut:\n\n• Berat material: ${gram} gram\n• Estimasi waktu cetak: ${jam} jam ${menit} menit\n• Estimasi total biaya: Rp${totalRp},-\n\nMohon informasi lebih lanjut terkait proses, ketersediaan slot cetak, dan konfirmasi pemesanan.\nTerima kasih.`;
+      const pesan = `Halo, saya telah menggunakan Kalkulator Biaya 3D Printing di 3Dir.id dan mendapatkan estimasi berikut:\n\n• Berat material: ${gram} gram\n• Estimasi waktu cetak: ${jam} jam ${menit} menit\n• Estimasi total biaya: Rp${totalRp},-\n\nMohon informasi lebih lanjut terkait proses, ketersediaan slot cetak, dan konfirmasi pemesanan.\nTerima kasih.`;
 
       const nomorWA = "6281936790869";
       const urlWA = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
