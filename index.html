@@ -1,21 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kalkulator 3D Printing | 3Dir.id</title>
-  <link rel="icon" href="favicon.ico" />
+  <link rel="icon" href="favicon.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg-light: linear-gradient(-45deg, #f3f4f6, #e0f7fa, #fce4ec, #f8bbd0);
-      --bg-dark: linear-gradient(-45deg, #1e1e2f, #2c3e50, #283345, #1e1e2f);
-      --card-bg-light: #ffffff;
-      --card-bg-dark: #2b2b3c;
-      --text-light: #222;
-      --text-dark: #eee;
-    }
-
     * {
       box-sizing: border-box;
     }
@@ -24,46 +15,30 @@
       font-family: 'Rubik', sans-serif;
       margin: 0;
       padding: 0;
-      background: var(--bg-dark);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
+      background: 
+        url('https://www.transparenttextures.com/patterns/horizontal-lines.png'),
+        linear-gradient(135deg, #1e3c72, #2a5298);
+      background-repeat: repeat;
+      background-size: auto;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      transition: background 0.5s ease;
+      animation: fadeIn 1s ease-in;
     }
 
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .container {
-      background: var(--card-bg-dark);
+      background: #ffffff;
       padding: 30px 20px;
       border-radius: 16px;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
       width: 90%;
       max-width: 460px;
-      color: var(--text-dark);
-      position: relative;
-      transition: background 0.5s, color 0.5s;
-    }
-
-    .toggle-mode {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: rgba(255, 255, 255, 0.15);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      padding: 5px 15px;
-      font-size: 12px;
-      cursor: pointer;
-      backdrop-filter: blur(4px);
     }
 
     .logo {
@@ -83,6 +58,7 @@
     h1 {
       text-align: center;
       margin-bottom: 25px;
+      color: #222;
       font-weight: 600;
       font-size: 20px;
     }
@@ -91,6 +67,7 @@
       margin-top: 15px;
       font-weight: 500;
       display: block;
+      color: #333;
     }
 
     input[type="number"] {
@@ -144,6 +121,7 @@
       font-size: 16px;
       font-weight: 500;
       text-align: center;
+      color: #222;
       white-space: pre-line;
     }
 
@@ -172,43 +150,35 @@
       margin-top: 25px;
       font-size: 13px;
       text-align: justify;
-      background-color: rgba(255,255,255,0.08);
+      color: #555;
+      background-color: #f8f8f8;
       border-radius: 8px;
       padding: 10px 14px;
       line-height: 1.6;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     }
 
     .keterangan strong {
       display: block;
       margin-bottom: 6px;
-    }
-
-    /* Light mode styles */
-    body.light {
-      background: var(--bg-light);
-    }
-
-    body.light .container {
-      background: var(--card-bg-light);
-      color: var(--text-light);
+      color: #333;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <button class="toggle-mode" onclick="toggleMode()">Mode</button>
     <div class="logo">
-      <img src="logo.png" alt="Logo 3Dir" />
+      <img src="logo.png" alt="Logo 3Dir">
     </div>
     <h1>Kalkulator Biaya 3D Printing</h1>
 
     <label for="gram">Berat Material (gram):</label>
-    <input type="number" id="gram" placeholder="Contoh: 50" />
+    <input type="number" id="gram" placeholder="Contoh: 50">
 
     <label>Waktu Cetak:</label>
     <div class="inline-input">
-      <input type="number" id="jam" placeholder="Jam" />
-      <input type="number" id="menit" placeholder="Menit" />
+      <input type="number" id="jam" placeholder="Jam">
+      <input type="number" id="menit" placeholder="Menit">
     </div>
 
     <button onclick="hitungBiaya()">Hitung Total</button>
@@ -217,8 +187,7 @@
     <div id="waLink"></div>
 
     <div class="keterangan">
-      <strong>Catatan:</strong>
-      Estimasi bersifat indikatif dan dapat berubah tergantung jenis material serta kompleksitas desain. Silakan hubungi kami untuk konfirmasi lebih lanjut.
+      <strong>Catatan:</strong> Estimasi bersifat indikatif dan dapat berubah tergantung jenis material serta kompleksitas desain. Silakan hubungi kami untuk konfirmasi lebih lanjut.
     </div>
   </div>
 
@@ -254,12 +223,9 @@
       const nomorWA = "6281936790869";
       const urlWA = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
 
-      document.getElementById('waLink').innerHTML =
-        `<a class="whatsapp-button" href="${urlWA}" target="_blank">Pesan via WhatsApp</a>`;
-    }
-
-    function toggleMode() {
-      document.body.classList.toggle("light");
+      document.getElementById('waLink').innerHTML = `
+        <a class="whatsapp-button" href="${urlWA}" target="_blank">Pesan via WhatsApp</a>
+      `;
     }
   </script>
 </body>
