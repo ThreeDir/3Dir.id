@@ -2,9 +2,14 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Kalkulator Biaya 3D Printing di 3Dir.id</title>
+  <title>Estimasi Biaya 3D Printing | 3Dir.id</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Rubik', sans-serif;
       margin: 0;
@@ -13,7 +18,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      animation: fadeInUp 0.8s ease-out;
     }
 
     .container {
@@ -27,12 +33,15 @@
 
     .logo {
       text-align: center;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     .logo img {
       width: 100px;
-      height: auto;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
     }
 
     h1 {
@@ -40,6 +49,7 @@
       margin-bottom: 25px;
       color: #222;
       font-weight: 600;
+      font-size: 20px;
     }
 
     label {
@@ -52,11 +62,17 @@
     input {
       width: 100%;
       padding: 12px;
-      margin-top: 5px;
+      margin-top: 6px;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 15px;
       background-color: #f9f9f9;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #ff6f00;
     }
 
     .inline-input {
@@ -77,6 +93,7 @@
       border: none;
       border-radius: 8px;
       font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
     }
@@ -94,6 +111,14 @@
       text-align: center;
       color: #222;
       white-space: pre-line;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+
+    #result.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     #waLink {
@@ -124,14 +149,25 @@
       color: #666;
       line-height: 1.5;
     }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="logo">
-      <img src="ChatGPT Image May 28, 2025, 12_17_10 AM.png" alt="Logo 3Dir">
+      <img src="logo-3dir.png" alt="Logo 3Dir">
     </div>
-    <h1>Kalkulator Biaya 3D Printing di 3Dir.id</h1>
+    <h1>Estimasi Biaya 3D Printing di 3Dir.id</h1>
 
     <label for="gram">Berat Material (gram):</label>
     <input type="number" id="gram" placeholder="Contoh: 50">
@@ -142,14 +178,13 @@
       <input type="number" id="menit" placeholder="Menit">
     </div>
 
-    <button onclick="hitungBiaya()">Hitung Total</button>
+    <button onclick="hitungBiaya()">Hitung Estimasi</button>
 
     <div id="result"></div>
     <div id="waLink"></div>
 
     <div class="keterangan">
-      <strong>Note:</strong> Estimasi biaya dihitung otomatis menggunakan kalkulator 3Dir.<br>
-      Biaya akhir dapat berubah tergantung material dan kompleksitas desain.
+      <strong>Catatan:</strong> Estimasi ini bersifat otomatis. Biaya akhir dapat berbeda tergantung jenis material dan tingkat kompleksitas desain.
     </div>
   </div>
 
@@ -159,9 +194,15 @@
       const jam = parseFloat(document.getElementById('jam').value) || 0;
       const menit = parseFloat(document.getElementById('menit').value) || 0;
 
+      const resultDiv = document.getElementById('result');
+      const waLinkDiv = document.getElementById('waLink');
+
+      resultDiv.classList.remove('show');
+
       if (isNaN(gram)) {
-        document.getElementById('result').innerText = "Masukkan berat yang valid!";
-        document.getElementById('waLink').innerHTML = "";
+        resultDiv.innerText = "Masukkan berat material dengan benar.";
+        waLinkDiv.innerHTML = "";
+        setTimeout(() => resultDiv.classList.add('show'), 10);
         return;
       }
 
@@ -177,16 +218,18 @@
       const biayaBahanRp = biayaMaterial.toLocaleString('id-ID');
       const biayaWaktuRp = biayaWaktu.toLocaleString('id-ID');
 
-      document.getElementById('result').innerText =
-        `Biaya Material: Rp ${biayaBahanRp}\nBiaya Waktu: Rp ${biayaWaktuRp}\nTotal: Rp ${totalRp}`;
+      resultDiv.innerText =
+        `Biaya Material: Rp ${biayaBahanRp}\nBiaya Waktu: Rp ${biayaWaktuRp}\nTotal Estimasi: Rp ${totalRp}`;
+      
+      setTimeout(() => resultDiv.classList.add('show'), 10);
 
-      const pesan = `Halo, saya telah menggunakan Kalkulator Biaya 3D Printing di 3Dir.id dan mendapatkan estimasi berikut:\n\n• Berat material: ${gram} gram\n• Estimasi waktu cetak: ${jam} jam ${menit} menit\n• Estimasi total biaya: Rp${totalRp},-\n\nMohon informasi lebih lanjut terkait proses, ketersediaan slot cetak, dan konfirmasi pemesanan.\nTerima kasih.`;
+      const pesan = `Halo, saya telah menghitung estimasi biaya 3D printing di 3Dir.id:\n\n• Berat material: ${gram} gram\n• Estimasi waktu cetak: ${jam} jam ${menit} menit\n• Total estimasi biaya: Rp${totalRp},-\n\nMohon info lebih lanjut mengenai proses dan ketersediaan slot. Terima kasih.`;
 
       const nomorWA = "6281936790869";
       const urlWA = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
 
-      document.getElementById('waLink').innerHTML = `
-        <a class="whatsapp-button" href="${urlWA}" target="_blank">Pesan via WhatsApp</a>
+      waLinkDiv.innerHTML = `
+        <a class="whatsapp-button" href="${urlWA}" target="_blank">Kirim via WhatsApp</a>
       `;
     }
   </script>
