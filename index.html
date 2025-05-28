@@ -1,249 +1,261 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="id">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kalkulator 3D Printing | 3Dir.id</title>
-  <link rel="icon" href="favicon.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator 3D Printing | 3Dir.id</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    body {
+      font-family: 'Rubik', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: 
+        url('https://www.transparenttextures.com/patterns/horizontal-lines.png'),
+        linear-gradient(135deg, #1e3c72, #2a5298);
+      background-repeat: repeat;
+      background-size: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      animation: fadeIn 1s ease-in;
+    }
 
-    body {
-      font-family: 'Rubik', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: 
-        url('https://www.transparenttextures.com/patterns/horizontal-lines.png'),
-        linear-gradient(135deg, #1e3c72, #2a5298);
-      background-repeat: repeat;
-      background-size: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      animation: fadeIn 1s ease-in;
-    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .container {
+      background: #ffffff;
+      padding: 30px 20px;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      width: 90%;
+      max-width: 460px;
+    }
 
-    .container {
-      background: #ffffff;
-      padding: 30px 20px;
-      border-radius: 16px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-      width: 90%;
-      max-width: 460px;
-    }
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-    .logo {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+    .logo img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 4px solid #ff6f00;
+      box-shadow: 0 0 15px rgba(255, 111, 0, 0.4);
+      object-fit: cover;
+    }
 
-    .logo img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 4px solid #ff6f00;
-      box-shadow: 0 0 15px rgba(255, 111, 0, 0.4);
-      object-fit: cover;
-    }
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #222;
+      font-weight: 600;
+      font-size: 20px;
+    }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 25px;
-      color: #222;
-      font-weight: 600;
-      font-size: 20px;
-    }
+    label {
+      margin-top: 15px;
+      font-weight: 500;
+      display: block;
+      color: #333;
+    }
 
-    label {
-      margin-top: 15px;
-      font-weight: 500;
-      display: block;
-      color: #333;
-    }
+    input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      background-color: #f9f9f9;
+      -moz-appearance: textfield;
+    }
 
-    input[type="number"] {
-      width: 100%;
-      padding: 12px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 15px;
-      background-color: #f9f9f9;
-      -moz-appearance: textfield;
-    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
 
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
+    .inline-input {
+      display: flex;
+      gap: 10px;
+    }
 
-    .inline-input {
-      display: flex;
-      gap: 10px;
-    }
+    .inline-input input {
+      flex: 1;
+    }
 
-    .inline-input input {
-      flex: 1;
-    }
+    button {
+      margin-top: 25px;
+      padding: 14px;
+      width: 100%;
+      background: #ff6f00;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-    button {
-      margin-top: 25px;
-      padding: 14px;
-      width: 100%;
-      background: #ff6f00;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+    button:hover {
+      background: #e65100;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 111, 0, 0.3);
+    }
 
-    button:hover {
-      background: #e65100;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(255, 111, 0, 0.3);
-    }
+    .reset-button {
+      margin-top: 10px;
+      padding: 14px;
+      width: 100%;
+      background: #9e9e9e;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-    #result {
-      margin-top: 20px;
-      font-size: 16px;
-      font-weight: 500;
-      text-align: center;
-      color: #222;
-      white-space: pre-line;
-    }
+    .reset-button:hover {
+      background: #757575;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(100, 100, 100, 0.2);
+    }
 
-    #waLink {
-      margin-top: 15px;
-      text-align: center;
-    }
+    #result {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: 500;
+      text-align: center;
+      color: #222;
+      white-space: pre-line;
+    }
 
-    a.whatsapp-button {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 10px 22px;
-      background-color: #25D366;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      transition: background 0.2s;
-    }
+    #waLink {
+      margin-top: 15px;
+      text-align: center;
+    }
 
-    a.whatsapp-button:hover {
-      background-color: #1ebe5d;
-    }
+    a.whatsapp-button {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 22px;
+      background-color: #25D366;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
 
-    .keterangan {
-      margin-top: 25px;
-      font-size: 13px;
-      text-align: justify;
-      color: #555;
-      background-color: #f8f8f8;
-      border-radius: 8px;
-      padding: 10px 14px;
-      line-height: 1.6;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    }
+    a.whatsapp-button:hover {
+      background-color: #1ebe5d;
+    }
 
-    .keterangan strong {
-      display: block;
-      margin-bottom: 6px;
-      color: #333;
-    }
-  </style>
+    .keterangan {
+      margin-top: 25px;
+      font-size: 13px;
+      text-align: justify;
+      color: #555;
+      background-color: #f8f8f8;
+      border-radius: 8px;
+      padding: 10px 14px;
+      line-height: 1.6;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .keterangan strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #333;
+    }
+  </style>
 </head>
-
 <body>
+  <div class="container">
+    <div class="logo">
+      <img src="logo.png" alt="Logo 3Dir">
+    </div>
+    <h1>Kalkulator Biaya 3D Printing</h1>
 
-  <div class="container">
+    <label for="gram">Berat Material (gram):</label>
+    <input type="number" id="gram" placeholder="Contoh: 50">
 
-    <div class="logo">
-      <img src="logo.png" alt="Logo 3Dir">
-    </div>
+    <label>Waktu Cetak:</label>
+    <div class="inline-input">
+      <input type="number" id="jam" placeholder="Jam">
+      <input type="number" id="menit" placeholder="Menit">
+    </div>
 
-    <h1>Kalkulator Biaya 3D Printing</h1>
+    <button onclick="hitungBiaya()">Hitung Total</button>
+    <button class="reset-button" onclick="resetForm()">Reset</button>
 
-    <label for="gram">Berat Material (gram):</label>
-    <input type="number" id="gram" placeholder="Contoh: 50">
+    <div id="result"></div>
+    <div id="waLink"></div>
 
-    <label>Waktu Cetak:</label>
-    <div class="inline-input">
-      <input type="number" id="jam" placeholder="Jam">
-      <input type="number" id="menit" placeholder="Menit">
-    </div>
+    <div class="keterangan">
+      <strong>Catatan:</strong> Estimasi bersifat indikatif dan dapat berubah tergantung jenis material serta kompleksitas desain. Silakan hubungi kami untuk konfirmasi lebih lanjut.
+    </div>
+  </div>
 
-    <button onclick="hitungBiaya()">Hitung Total</button>
-    <button onclick="resetForm()" style="background-color:#bbb; color:#222; margin-top:10px;">Reset</button>
+  <script>
+    function hitungBiaya() {
+      const gram = parseFloat(document.getElementById('gram').value);
+      const jam = parseFloat(document.getElementById('jam').value) || 0;
+      const menit = parseFloat(document.getElementById('menit').value) || 0;
 
-    <div id="result"></div>
-    <div id="waLink"></div>
+      if (isNaN(gram)) {
+        document.getElementById('result').innerText = "Masukkan berat yang valid!";
+        document.getElementById('waLink').innerHTML = "";
+        return;
+      }
 
-    <div class="keterangan">
-      <strong>Catatan:</strong> Estimasi bersifat indikatif dan dapat berubah tergantung jenis material serta kompleksitas desain. Silakan hubungi kami untuk konfirmasi lebih lanjut.
-    </div>
+      const hargaPerGram = 800;
+      const biayaPerMenit = 34;
 
-  </div>
+      const durasiMenit = (jam * 60) + menit;
+      const biayaMaterial = gram * hargaPerGram;
+      const biayaWaktu = durasiMenit * biayaPerMenit;
+      const total = biayaMaterial + biayaWaktu;
 
-  <script>
-    function hitungBiaya() {
-      const gram = parseFloat(document.getElementById('gram').value);
-      const jam = parseFloat(document.getElementById('jam').value) || 0;
-      const menit = parseFloat(document.getElementById('menit').value) || 0;
+      const totalRp = total.toLocaleString('id-ID');
+      const biayaBahanRp = biayaMaterial.toLocaleString('id-ID');
+      const biayaWaktuRp = biayaWaktu.toLocaleString('id-ID');
 
-      if (isNaN(gram)) {
-        document.getElementById('result').innerText = "Masukkan berat yang valid!";
-        document.getElementById('waLink').innerHTML = "";
-        return;
-      }
+      document.getElementById('result').innerText =
+        `Biaya Material: Rp ${biayaBahanRp}\nBiaya Waktu: Rp ${biayaWaktuRp}\nTotal: Rp ${totalRp}`;
 
-      const hargaPerGram = 800;
-      const biayaPerMenit = 34;
+      const pesan = `Halo, saya telah menggunakan Kalkulator Biaya 3D Printing di 3Dir.id dan mendapatkan estimasi berikut:\n\n• Berat material: ${gram} gram\n• Estimasi waktu cetak: ${jam} jam ${menit} menit\n• Estimasi total biaya: Rp${totalRp},-\n\nMohon informasi lebih lanjut terkait proses, ketersediaan slot cetak, dan konfirmasi pemesanan.\nTerima kasih.`;
 
-      const durasiMenit = (jam * 60) + menit;
-      const biayaMaterial = gram * hargaPerGram;
-      const biayaWaktu = durasiMenit * biayaPerMenit;
-      const total = biayaMaterial + biayaWaktu;
+      const nomorWA = "6281936790869";
+      const urlWA = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
 
-      const totalRp = total.toLocaleString('id-ID');
-      const biayaBahanRp = biayaMaterial.toLocaleString('id-ID');
-      const biayaWaktuRp = biayaWaktu.toLocaleString('id-ID');
+      document.getElementById('waLink').innerHTML = `
+        <a class="whatsapp-button" href="${urlWA}" target="_blank">Pesan via WhatsApp</a>
+      `;
+    }
 
-      document.getElementById('result').innerText =
-        `Biaya Material: Rp ${biayaBahanRp}\nBiaya Waktu: Rp ${biayaWaktuRp}\nTotal: Rp ${totalRp}`;
-
-      const pesan = `Halo, saya telah menggunakan Kalkulator Biaya 3D Printing di 3Dir.id dan mendapatkan estimasi berikut:\n\n• Berat material: ${gram} gram\n• Estimasi waktu cetak: ${jam} jam ${menit} menit\n• Estimasi total biaya: Rp${totalRp},-\n\nMohon informasi lebih lanjut terkait proses, ketersediaan slot cetak, dan konfirmasi pemesanan.\nTerima kasih.`;
-
-      const nomorWA = "6281936790869";
-      const urlWA = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
-
-      document.getElementById('waLink').innerHTML = `
-        <a class="whatsapp-button" href="${urlWA}" target="_blank">Pesan via WhatsApp</a>
-      `;
-    }
-
-    function resetForm() {
-      document.getElementById('gram').value = '';
-      document.getElementById('jam').value = '';
-      document.getElementById('menit').value = '';
-      document.getElementById('result').innerText = '';
-      document.getElementById('waLink').innerHTML = '';
-    }
-  </script>
-
+    function resetForm() {
+      document.getElementById('gram').value = '';
+      document.getElementById('jam').value = '';
+      document.getElementById('menit').value = '';
+      document.getElementById('result').innerText = '';
+      document.getElementById('waLink').innerHTML = '';
+    }
+  </script>
 </body>
 </html>
